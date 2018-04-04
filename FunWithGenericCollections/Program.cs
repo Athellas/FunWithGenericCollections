@@ -10,18 +10,20 @@ namespace FunWithGenericCollections
     {
         static void Main(string[] args)
         {
+            UseGenericList();
+            Console.ReadLine();
         }
 
         static void UseGenericList()
         {
             // Make a List of Person objects, filled with
             // collection/object init syntax.
-            List<Person> people = new List<Person>();
+            List<Person> people = new List<Person>()
             {
-                new Person {FirstName = "Homer", LastName = "Simpson", Age = 47};
-                new Person {FirstName = "Marge", LastName = "Simpson", Age = 45};
-                new Person {FirstName = "Lisa", LastName = "Simpson", Age = 9};
-                new Person {FirstName = "Bart", LastName = "Simpson", Age = 8};
+                new Person {FirstName = "Homer", LastName = "Simpson", Age = 47},
+                new Person {FirstName = "Marge", LastName = "Simpson", Age = 45},
+                new Person {FirstName = "Lisa", LastName = "Simpson", Age = 9},
+                new Person {FirstName = "Bart", LastName = "Simpson", Age = 8}
             };
 
             // Print out # of items in List.
@@ -43,5 +45,6 @@ namespace FunWithGenericCollections
                 Console.WriteLine("First Names: {0}", arrayOfPeople[i].FirstName);
             }
         }
+
     }
 }
