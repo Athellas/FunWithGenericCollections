@@ -12,6 +12,8 @@ namespace FunWithGenericCollections
         {
             UseGenericList();
             UseGenericStack();
+            UseGenericQueue();
+            UseSortedSet();
             Console.ReadLine();
         }
 
@@ -73,5 +75,63 @@ namespace FunWithGenericCollections
             }
         }
 
+        static void GetCoffee(Person p)
+        {
+            Console.WriteLine("{0} got coffee!", p.FirstName);
+        }
+
+        static void UseGenericQueue()
+        {
+            //Make a Q with 3 ppl
+            Queue<Person> peopleQ = new Queue<Person>();
+            peopleQ.Enqueue(new Person { FirstName = "Homer", LastName = "Simpson",Age = 47 });
+            peopleQ.Enqueue(new Person { FirstName = "Marge",LastName = "Simpson",Age = 45 });
+            peopleQ.Enqueue(new Person { FirstName = "Lisa",LastName = "Simpson",Age = 9 });
+
+            //peek first p in q
+            Console.WriteLine($"{peopleQ.Peek().FirstName} is the first in line!");
+
+            //remove
+            GetCoffee(peopleQ.Dequeue());
+            GetCoffee(peopleQ.Dequeue());
+            GetCoffee(peopleQ.Dequeue());
+
+            try
+            {
+                GetCoffee(peopleQ.Dequeue());
+            }
+            catch(InvalidOperationException e)
+            {
+                Console.WriteLine("Error! {0}", e.Message);
+            }
+        }
+
+        static void UseSortedSet()
+        {
+            SortedSet<Person> setOfPeople = new SortedSet<Person>(new SortPeopleByAge())
+            {
+                new Person {FirstName= "Homer", LastName="Simpson", Age=47},
+                new Person {FirstName= "Marge", LastName="Simpson", Age=45},
+                new Person {FirstName= "Lisa", LastName="Simpson", Age=9},
+                new Person {FirstName= "Bart", LastName="Simpson", Age=8}
+            };
+
+            // note that items are sorted by age
+            foreach (Person p in setOfPeople)
+            {
+                Console.WriteLine(p);
+            }
+            Console.WriteLine();
+
+            // add a few new people with various ages
+            setOfPeople.Add(new Person { FirstName = "Saku", LastName = "Jones", Age = 1 });
+            setOfPeople.Add(new Person { FirstName = "Mikko", LastName = "Jones", Age = 32 });
+
+            //still sorted by age!
+            foreach (Person p in setOfPeople)
+            {
+                Console.WriteLine(p);
+            }
+        }
     }
 }
